@@ -24,6 +24,8 @@ struct ContentView: View {
     
     @State private var selectedInputUnit: Units = .Celsius
     @State private var selectedOutputUnit: Units = .Fahrenheit
+    
+    @State private var result: Double = 0
 
     
     @FocusState private var inputIsFocused: Bool
@@ -59,8 +61,19 @@ struct ContentView: View {
                     }
                 }
                 
-                Section {
-                    
+                Section("Convert to") {
+                    Picker("Convert to", selection: $selectedOutputUnit) {
+                        ForEach(Units.allCases) { unit in
+                            Text(unit.rawValue.capitalized)}
+                    }
+                    .pickerStyle(.segmented)
+                }
+                
+                Section("\(input) \(selectedInputUnit) is exactly") {
+                    HStack{
+                        Text("\(result)")
+                        Text("\(selectedOutputUnit)")
+                    }
                 }
             }
             .navigationTitle("Unit Converter")
