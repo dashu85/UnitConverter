@@ -52,12 +52,12 @@ struct ContentView: View {
 
     @FocusState private var inputIsFocused: Bool
     
-    // Inserted
+    // Custom formatter to show only two places after the dot and not showing anything when 0 is chosen
     private let quantityFormatter: NumberFormatter = {
             let formatter = NumberFormatter()
             formatter.locale = Locale.current
             formatter.numberStyle = .decimal
-            formatter.minimumFractionDigits = 2
+            formatter.minimumFractionDigits = 0
             formatter.maximumFractionDigits = 2
             formatter.zeroSymbol = ""
             return formatter
