@@ -72,11 +72,13 @@ struct ContentView: View {
                     HStack{
                         TextField("0,00", value: $input, formatter: quantityFormatter)
                             .keyboardType(.decimalPad)
+                            .focused($inputIsFocused)
                         Picker("", selection: $selectedInputUnit) {
                             ForEach(Units.allCases) { unit in
                                 Text(unit.rawValue.capitalized)
                             }
                         }
+                        
                     }
                 }
                 .keyboardType(.numberPad)
@@ -97,6 +99,13 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Unit Converter")
+            .toolbar {
+                if inputIsFocused {
+                    Button("Done") {
+                        inputIsFocused = false
+                    }
+                }
+            }
         }
     }
 }
